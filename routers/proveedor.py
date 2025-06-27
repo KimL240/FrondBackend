@@ -39,4 +39,20 @@ def update_proveedores(id: int, data: proveedorCreate, session: Session=Depends(
 
 @router.patch('/{id}', response_model=proveedorRead)
 def patch_proveedores(id: int, data: proveedorUpdate, session: Session=Depends(get_session)):
-    proveedores= session.get(proveedores)
+    proveedores= session.get(proveedores, id)
+    if not proveedores:
+        raise HTTPException(status_code=404, detail='No encontrado')
+    for key, value in data.dict(exclude_unset=True).items():
+        setattr(proveedores, key, value)
+    session.commit()
+    session.refresh(proveedores)
+    return proveedores
+
+@router.delete('/{id}')
+def delete_proveedores(id: int, session: Session=Depends(get_session)):
+    proveedores=session.get(proveedores, id)
+    if not proveedores:
+        raise HTTPException(status_code=404, detail='No encontrado')
+    session.delete(proveedores)
+    session.commit()
+    return {'ok': True, 'Mensaje':'proveedor eliminado correctamente'}
