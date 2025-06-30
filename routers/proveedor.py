@@ -3,56 +3,45 @@ from sqlmodel import Session, select
 from typing import List
 from database import get_session
 from models.proveedor import proveedores
-from schemas.proveedor import proveedorBase, proveedorCreate, proveedorRead, proveedorUpdate
 
-router= APIRouter(prefix='/proveedores', tags=['proveedores'])
+router = APIRouter()
 
-@router.get('/', response_model=List[proveedorRead])
-def get_proveedores(session:Session=Depends(get_session)):
-    proveedores=session.exe(select(proveedores)).all()
-    
-@router.get('/{id}', response_model=proveedorRead)
-def get_proveedores(id: int, session: Session=Depends(get_session)):
-    proveedores= session.get(proveedores, id)
-    if not proveedores:
-        raise HTTPException(status_code=404, detail='No encontrado')
-    return proveedores
+@router.get("/proveedor/", response_model=List[proveedores], summary="Obtener Proveedores")
+async def get_proveedores(session: Session = Depends(get_session)):
+    return session.exec(select(proveedores)).all()
 
-@router.post('/', response_model=proveedorRead, status_code=201)
-def create_producto(data:proveedorBase, session: Session=Depends(get_session)):
-    nuevo=proveedores(**data.dict())
-    session.add(nuevo)
+@router.get("/proveedor/{id_proveedor}", response_model=proveedores, summary="Obtener Proveedor por ID")
+async def get_proveedor_id(id_proveedor: int, session: Session = Depends(get_session)):
+    proveedor = session.get(proveedores, id_proveedor)
+    if not proveedor:
+        raise HTTPException(status_code=404, detail="Proveedor no encontrado")
+    return proveedor
+
+@router.post("/proveedor/", response_model=proveedores, summary="Crear Proveedor")
+async def create_proveedor(proveedor: proveedores, session: Session = Depends(get_session)):
+    existente = session.exec(select(proveedores).where(proveedores.correo == proveedor.correo)).first()
+    if existente:
+        raise HTTPException(status_code=409, detail="El proveedor ya existe")
+    session.add(proveedor)
     session.commit()
-    session.refresh(nuevo)
-    return nuevo
+    session.refresh(proveedor)
+    return proveedor
 
-@router.put('/{id}', response_model=proveedorRead)
-def update_proveedores(id: int, data: proveedorCreate, session: Session=Depends(get_session)):
-    proveedores=session.get(proveedores, id)
-    if not proveedores:
-        raise HTTPException(status_code=404, detail='No encontrado')
-    for key, value in data.dict().items():
-        setattr(proveedores, key, value)
+@router.put("/proveedor/{id_proveedor}", response_model=proveedores, summary="Actualizar Proveedor")
+async def update_proveedor(id_proveedor: int, proveedor: proveedores, session: Session = Depends(get_session)):
+    existente = session.get(proveedores, id_proveedor)
+    if not existente:
+        raise HTTPException(status_code=404, detail="Proveedor no encontrado")
+    existente.sqlmodel_update(proveedor)
+    session.add(existente)
     session.commit()
-    session.refresh(proveedores)
-    return proveedores
+    session.refresh(existente)
+    return existente
 
-@router.patch('/{id}', response_model=proveedorRead)
-def patch_proveedores(id: int, data: proveedorUpdate, session: Session=Depends(get_session)):
-    proveedores= session.get(proveedores, id)
-    if not proveedores:
-        raise HTTPException(status_code=404, detail='No encontrado')
-    for key, value in data.dict(exclude_unset=True).items():
-        setattr(proveedores, key, value)
+@router.delete("/proveedor/{id_proveedor}", status_code=204, summary="Eliminar Proveedor")
+async def delete_proveedor(id_proveedor: int, session: Session = Depends(get_session)):
+    proveedor = session.get(proveedores, id_proveedor)
+    if not proveedor:
+        raise HTTPException(status_code=404, detail="Proveedor no encontrado")
+    session.delete(proveedor)
     session.commit()
-    session.refresh(proveedores)
-    return proveedores
-
-@router.delete('/{id}')
-def delete_proveedores(id: int, session: Session=Depends(get_session)):
-    proveedores=session.get(proveedores, id)
-    if not proveedores:
-        raise HTTPException(status_code=404, detail='No encontrado')
-    session.delete(proveedores)
-    session.commit()
-    return {'ok': True, 'Mensaje':'proveedor eliminado correctamente'}

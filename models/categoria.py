@@ -1,9 +1,11 @@
-from sqlmodel import SQLModel, Field, Relationship
-from typing import Optional, List, TYPE_CHECKING
+from sqlmodel import SQLModel , Field, Relationship
+from typing import Optional , List , TYPE_CHECKING
+
 if TYPE_CHECKING:
     from models.producto import Producto
-class categoria(SQLModel, table=True):
-    id: Optional[int]= Field(default=None, primary_key=True)
-    nombre: str
-    unidad: str
-    productos: List['Producto']=Relationship(back_populates='categoria')
+
+class Categoria(SQLModel, table=True):
+    id : Optional[int] = Field(primary_key=True)
+    nombre_categoria : str
+
+    producto : List["Producto"] = Relationship(back_populates="categoria")

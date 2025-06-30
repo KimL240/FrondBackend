@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Categorías</title>
+  <link rel="stylesheet" href="/Frontend/style.css">
+</head>
+<body>
+  <main class="contenedor">
+    <h1>Gestión de Categorías</h1>
+
+    <!-- FORMULARIO PARA AGREGAR CATEGORÍA -->
+    <section class="formulario">
+      <form id="categoriaForm">
+        <!-- ID solo visible si lo necesitas; se puede ocultar o poner como readonly -->
+        <input type="number" id="id" placeholder="ID de categoría (auto)" readonly />
+        <input type="text" id="nombre_categoria" placeholder="Nombre de la categoría" required />
+        <button type="submit">Agregar Categoría</button>
+      </form>
+    </section>
+
+    <!-- SECCIÓN QUE MUESTRA TODAS LAS CATEGORÍAS -->
+    <section id="categorias" class="lista-categorias">
+      <!-- Cada categoría se renderiza desde JS -->
+    </section>
+  </main>
+
+  <script src="categoria.js"></script>
+</body>
+</html>

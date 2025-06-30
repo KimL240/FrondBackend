@@ -1,55 +1,47 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
+from typing import List
 from database import get_session
-from models.usurario import Usuario
-from schemas.usuario import UsuarioCreate, UsuarioRead, UsuarioUpdate
+from models.usuario import Usuario
 
 router = APIRouter()
 
-@router.get("/", response_model=list[UsuarioRead])
-def get_usuarios(session: Session = Depends(get_session)):
+@router.get("/usuario/", response_model=List[Usuario], summary="Obtener Usuarios")
+async def get_usuarios(session: Session = Depends(get_session)):
     return session.exec(select(Usuario)).all()
 
-@router.get("/{id}", response_model=UsuarioRead)
-def get_usuario(id: int, session: Session = Depends(get_session)):
-    usuario = session.get(Usuario, id)
+@router.get("/usuario/{id_usuario}", response_model=Usuario, summary="Obtener Usuario por ID")
+async def get_usuario_id(id_usuario: int, session: Session = Depends(get_session)):
+    usuario = session.get(Usuario, id_usuario)
     if not usuario:
-        raise HTTPException(status_code=404, detail="No encontrado")
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
     return usuario
 
-@router.post("/", response_model=UsuarioRead)
-def create_usuario(usuario: UsuarioCreate, session: Session = Depends(get_session)):
-    nuevo = Usuario(**usuario.dict())
-    session.add(nuevo)
+@router.post("/usuario/", response_model=Usuario, summary="Crear Usuario")
+async def create_usuario(usuario: Usuario, session: Session = Depends(get_session)):
+    existente = session.exec(select(Usuario).where(Usuario.correo == usuario.correo)).first()
+    if existente:
+        raise HTTPException(status_code=409, detail="El usuario ya existe")
+    session.add(usuario)
     session.commit()
-    session.refresh(nuevo)
-    return nuevo
-
-@router.put("/{id}", response_model=UsuarioRead)
-def update_usuario(id: int, data: UsuarioCreate, session: Session = Depends(get_session)):
-    usuario = session.get(Usuario, id)
-    if not usuario:
-        raise HTTPException(status_code=404, detail="No encontrado")
-    for key, value in data.dict().items():
-        setattr(usuario, key, value)
-    session.commit()
+    session.refresh(usuario)
     return usuario
 
-@router.patch("/{id}", response_model=UsuarioRead)
-def patch_usuario(id: int, data: UsuarioUpdate, session: Session = Depends(get_session)):
-    usuario = session.get(Usuario, id)
-    if not usuario:
-        raise HTTPException(status_code=404, detail="No encontrado")
-    for key, value in data.dict(exclude_unset=True).items():
-        setattr(usuario, key, value)
+@router.put("/usuario/{id_usuario}", response_model=Usuario, summary="Actualizar Usuario")
+async def update_usuario(id_usuario: int, usuario: Usuario, session: Session = Depends(get_session)):
+    existente = session.get(Usuario, id_usuario)
+    if not existente:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    existente.sqlmodel_update(usuario)
+    session.add(existente)
     session.commit()
-    return usuario
+    session.refresh(existente)
+    return existente
 
-@router.delete("/{id}")
-def delete_usuario(id: int, session: Session = Depends(get_session)):
-    usuario = session.get(Usuario, id)
+@router.delete("/usuario/{id_usuario}", status_code=204, summary="Eliminar Usuario")
+async def delete_usuario(id_usuario: int, session: Session = Depends(get_session)):
+    usuario = session.get(Usuario, id_usuario)
     if not usuario:
-        raise HTTPException(status_code=404, detail="No encontrado")
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
     session.delete(usuario)
     session.commit()
-    return {"ok": True}

@@ -2,7 +2,7 @@ from sqlmodel import SQLModel, Session, create_engine
 from fastapi import FastAPI
 
 sql=r'fronbac.db'
-url=f'sqllite:///{sql}'
+url=f'sqlite:///{sql}'
 engine=create_engine(url,echo=True)
 
 def get_session():
