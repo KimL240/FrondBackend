@@ -1,30 +1,30 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html> <!-- Ok, le digo al navegador que este es un archivo HTML -->
+<html lang="es"> <!-- Voy con español como idioma principal -->
 <head>
-  <meta charset="UTF-8">
-  <title>Gestión de Categorías</title>
-  <link rel="stylesheet" href="/Frontend/style.css">
+  <meta charset="UTF-8"> <!-- Para que los acentos y ñ se vean bien -->
+  <title>Gestión de Categorías</title> <!-- Lo que va a aparecer como título en la pestaña -->
+  <link rel="stylesheet" href="/Frontend/style.css"> <!-- Llamo mi archivo de estilos -->
 </head>
 <body>
-  <main class="contenedor">
-    <h1>Gestión de Categorías</h1>
+  <main class="contenedor"> <!-- Todo va dentro de este contenedor principal -->
+    <h1>Gestión de Categorías</h1> <!-- Título grande pa' que se vea quién manda -->
 
     <!-- FORMULARIO PARA AGREGAR CATEGORÍA -->
     <section class="formulario">
       <form id="categoriaForm">
         <!-- ID solo visible si lo necesitas; se puede ocultar o poner como readonly -->
-        <input type="number" id="id" placeholder="ID de categoría (auto)" readonly />
-        <input type="text" id="nombre_categoria" placeholder="Nombre de la categoría" required />
-        <button type="submit">Agregar Categoría</button>
+        <input type="number" id="id" placeholder="ID de categoría (auto)" readonly /> <!-- No editable, solo pa' mostrar el ID -->
+        <input type="text" id="nombre_categoria" placeholder="Nombre de la categoría" required /> <!-- Aquí escribo el nombre -->
+        <button type="submit">Agregar Categoría</button> <!-- Botoncito para agregar -->
       </form>
     </section>
 
     <!-- SECCIÓN QUE MUESTRA TODAS LAS CATEGORÍAS -->
     <section id="categorias" class="lista-categorias">
-      <!-- Cada categoría se renderiza desde JS -->
+      <!-- Cada categoría se renderiza desde JS --> <!-- Aquí el JS mete todo lo que se va creando -->
     </section>
   </main>
 
-  <script src="categoria.js"></script>
+  <script src="categoria.js"></script> <!-- Aquí traigo la lógica en JS -->
 </body>
 </html>

@@ -1,28 +1,28 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html> <!-- Aquí le digo al navegador que esto es HTML puro -->
+<html lang="es"> <!-- Todo el contenido está en español -->
 <head>
-  <meta charset="UTF-8" />
-  <title>Gestión de Ventas</title>
-  <link rel="stylesheet" href="/Frontend/style.css" />
+  <meta charset="UTF-8" /> <!-- Para que no se dañen los acentos ni la ñ -->
+  <title>Gestión de Ventas</title> <!-- Lo que aparece en la pestaña del navegador -->
+  <link rel="stylesheet" href="/Frontend/style.css" /> <!-- Enlazo mi archivo de estilos pa' que se vea más bonito -->
 </head>
 <body>
-  <main class="contenedor">
-    <h1>Gestión de Ventas</h1>
+  <main class="contenedor"> <!-- Aquí meto todo lo importante de la página -->
+    <h1>Gestión de Ventas</h1> <!-- Título principal, que se note que es de ventas -->
 
     <!-- FORMULARIO PARA AGREGAR VENTA -->
     <section class="formulario">
-      <form id="ventaForm">
-        <input type="date" id="fecha" required />
-        <button type="submit">Agregar Venta</button>
+      <form id="ventaForm"> <!-- Formulario donde el usuario mete una venta -->
+        <input type="date" id="fecha" required /> <!-- Fecha de la venta, obligatorio -->
+        <button type="submit">Agregar Venta</button> <!-- Botón para guardar la venta -->
       </form>
     </section>
 
     <!-- SECCIÓN QUE MUESTRA TODAS LAS VENTAS -->
     <section id="ventas" class="lista-ventas">
-      <!-- Cada venta se renderiza desde JS -->
+      <!-- Cada venta se renderiza desde JS --> <!-- Aquí el JS mete cada venta que se vaya creando -->
     </section>
   </main>
 
-  <script src="ventas.js"></script>
+  <script src="ventas.js"></script> <!-- Archivo JS donde vive toda la lógica -->
 </body>
 </html>

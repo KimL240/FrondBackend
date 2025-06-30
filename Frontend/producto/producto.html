@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html> <!-- Le digo al navegador que este es un documento HTML -->
+<html lang="es"> <!-- Voy con español como idioma principal -->
 <head>
-  <meta charset="UTF-8">
-  <title>Gestión de Productos</title>
-  <link rel="stylesheet" href="/Frontend/style.css">
+  <meta charset="UTF-8"> <!-- Para que no se me dañen los acentos ni la ñ -->
+  <title>Gestión de Productos</title> <!-- Lo que va a salir en la pestañita del navegador -->
+  <link rel="stylesheet" href="/Frontend/style.css"> <!-- Enlazo mi archivo de estilos para que se vea bonito -->
 </head>
 <body>
-  <main class="contenedor">
-    <h1>Gestión de Productos</h1>
+  <main class="contenedor"> <!-- Aquí empieza el contenido principal -->
+    <h1>Gestión de Productos</h1> <!-- Título principal para que se sepa de qué va esto -->
 
     <!-- FORMULARIO PARA AGREGAR PRODUCTO -->
     <section class="formulario">
-      <form id="productoForm">
-        <input type="text" id="nombre" placeholder="Nombre del producto" required />
-        <input type="number" id="precio" placeholder="Precio" step="0.01" required />
-        <button type="submit">Agregar Producto</button>
+      <form id="productoForm"> <!-- Formulario para meter productos -->
+        <input type="text" id="nombre" placeholder="Nombre del producto" required /> <!-- Aquí se escribe el nombre -->
+        <input type="number" id="precio" placeholder="Precio" step="0.01" required /> <!-- Precio con decimales -->
+        <button type="submit">Agregar Producto</button> <!-- Botón para enviar el formulario -->
       </form>
     </section>
 
     <!-- SECCIÓN QUE MUESTRA TODOS LOS PRODUCTOS -->
     <section id="productos" class="lista-productos">
-      <!-- Cada producto se renderiza desde JS -->
+      <!-- Cada producto se renderiza desde JS --> <!-- Aquí el JS mete los productos automáticamente -->
     </section>
   </main>
 
-  <script src="productos.js"></script>
+  <script src="productos.js"></script> <!-- Archivo JS que se encarga de la lógica -->
 </body>
 </html>

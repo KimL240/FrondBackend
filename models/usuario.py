@@ -1,14 +1,9 @@
-from sqlmodel import SQLModel , Field, Relationship
-from typing import List , Optional , TYPE_CHECKING
+from sqlmodel import SQLModel, Field # importo lo necesario para armar el modelo
+from typing import Optional # para usar tipos opcionales en los campos
 
-if TYPE_CHECKING:
-    from models.ventas import Venta
-
-class Usuario(SQLModel, table=True):
-    id : Optional[int]= Field(primary_key=True)
-    nombre : str
-    apellido : str
-    edad : int
-    correo : str
-
-    venta: List["Venta"] = Relationship(back_populates="usuario")
+# Clase para el modelo de Proveedores
+class proveedores(SQLModel, table=True): # table=True dice que esto se convierte en tabla
+    id: Optional[int] = Field(default=None, primary_key=True) # identificador único, se genera solo
+    nombre_empresa: str # nombre de la empresa del proveedor
+    correo: str # correo del proveedor
+    telefono: str # número de contacto

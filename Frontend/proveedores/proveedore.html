@@ -1,30 +1,30 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html> <!-- Este archivo es HTML, empezamos con lo básico -->
+<html lang="es"> <!-- Todo está en español -->
 <head>
-  <meta charset="UTF-8" />
-  <title>Gestión de Proveedores</title>
-  <link rel="stylesheet" href="/Frontend/style.css" />
+  <meta charset="UTF-8" /> <!-- Para que los acentos y símbolos se vean bien -->
+  <title>Gestión de Proveedores</title> <!-- Título que se ve en la pestaña -->
+  <link rel="stylesheet" href="/Frontend/style.css" /> <!-- Llamo a los estilos para que se vea decente -->
 </head>
 <body>
-  <main class="contenedor">
-    <h1>Gestión de Proveedores</h1>
+  <main class="contenedor"> <!-- Aquí va todo lo importante -->
+    <h1>Gestión de Proveedores</h1> <!-- Título bonito para saber de qué va -->
 
     <!-- FORMULARIO PARA AGREGAR PROVEEDOR -->
     <section class="formulario">
-      <form id="proveedorForm">
-        <input type="text" id="nombre_empresa" placeholder="Nombre de la empresa" required />
-        <input type="email" id="correo" placeholder="Correo electrónico" required />
-        <input type="tel" id="telefono" placeholder="Teléfono" required />
-        <button type="submit">Agregar Proveedor</button>
+      <form id="proveedorForm"> <!-- Formulario para meter datos del proveedor -->
+        <input type="text" id="nombre_empresa" placeholder="Nombre de la empresa" required /> <!-- nombre sí o sí -->
+        <input type="email" id="correo" placeholder="Correo electrónico" required /> <!-- correo válido -->
+        <input type="tel" id="telefono" placeholder="Teléfono" required /> <!-- el número no se escapa -->
+        <button type="submit">Agregar Proveedor</button> <!-- Botón para enviar -->
       </form>
     </section>
 
     <!-- SECCIÓN QUE MUESTRA TODOS LOS PROVEEDORES -->
     <section id="proveedores" class="lista-proveedores">
-      <!-- Cada proveedor se renderiza desde JS -->
+      <!-- Cada proveedor se renderiza desde JS --> <!-- Esto lo pinta el JS cuando se carga -->
     </section>
   </main>
 
-  <script src="proveedores.js"></script>
+  <script src="proveedores.js"></script> <!-- Traigo la parte mágica en JS -->
 </body>
 </html>

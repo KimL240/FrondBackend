@@ -1,31 +1,31 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html> <!-- Archivo HTML, como siempre empezamos -->
+<html lang="es"> <!-- Todo está en español -->
 <head>
-  <meta charset="UTF-8" />
-  <title>Gestión de Usuarios</title>
-  <link rel="stylesheet" href="/Frontend/style.css" />
+  <meta charset="UTF-8" /> <!-- Para que se vean bien los acentos y caracteres raros -->
+  <title>Gestión de Usuarios</title> <!-- El título que aparece en la pestaña del navegador -->
+  <link rel="stylesheet" href="/Frontend/style.css" /> <!-- Le pongo estilo para que no se vea tan plano -->
 </head>
 <body>
-  <main class="contenedor">
-    <h1>Gestión de Usuarios</h1>
+  <main class="contenedor"> <!-- Aquí va todo el contenido bonito -->
+    <h1>Gestión de Usuarios</h1> <!-- Título principal, que se note el tema -->
 
     <!-- FORMULARIO PARA AGREGAR USUARIO -->
     <section class="formulario">
-      <form id="usuarioForm">
-        <input type="text" id="nombre" placeholder="Nombre" required />
-        <input type="text" id="apellido" placeholder="Apellido" required />
-        <input type="number" id="edad" placeholder="Edad" required />
-        <input type="email" id="correo" placeholder="Correo electrónico" required />
-        <button type="submit">Agregar Usuario</button>
+      <form id="usuarioForm"> <!-- Form para añadir usuarios -->
+        <input type="text" id="nombre" placeholder="Nombre" required /> <!-- Campo para el nombre -->
+        <input type="text" id="apellido" placeholder="Apellido" required /> <!-- Campo para el apellido -->
+        <input type="number" id="edad" placeholder="Edad" required /> <!-- Aquí va la edad -->
+        <input type="email" id="correo" placeholder="Correo electrónico" required /> <!-- Y aquí el correo -->
+        <button type="submit">Agregar Usuario</button> <!-- Botón para mandar los datos -->
       </form>
     </section>
 
     <!-- SECCIÓN QUE MUESTRA TODOS LOS USUARIOS -->
     <section id="usuarios" class="lista-usuarios">
-      <!-- Cada usuario se renderiza desde JS -->
+      <!-- Cada usuario se renderiza desde JS --> <!-- Aquí el JS se encarga de pintar la lista -->
     </section>
   </main>
 
-  <script src="usuario.js"></script>
+  <script src="usuario.js"></script> <!-- Archivo con toda la lógica en JS -->
 </body>
 </html>
